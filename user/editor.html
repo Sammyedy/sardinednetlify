@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Editor</title>
+</head>
+<body>
+  <h1>Image Editor</h1>
+  <form id="imageForm" enctype="multipart/form-data">
+    <input type="file" name="imageFile" id="imageFileInput">
+    <input type="submit" value="Save">
+  </form>
+
+  <script>
+    // Event listener for the form submit
+    document.getElementById("imageForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      var formData = new FormData(this);
+
+      fetch("upload_image.php", {
+        method: "POST",
+        body: formData
+      })
+      .then(function(response) {
+        if (response.ok) {
+          return response.text();
+        }
+        throw new Error("Error occurred during image upload.");
+      })
+      .then(function(imageUrl) {
+        window.opener.postMessage(imageUrl, "*");
+        window.close();
+      })
+      .catch(function(error) {
+        console.error(error);
+      });
+    });
+  </script>
+</body>
+</html>

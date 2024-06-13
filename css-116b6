@@ -1,0 +1,6 @@
+﻿@font-face {
+  font-family: 'Vidaloka';
+  font-style: normal;
+  font-weight: 400;
+  src: url(s/vidaloka/v18/7cHrv4c3ipenMKlEavs7wHo.ttf) format('truetype');
+}

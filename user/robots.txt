@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /index_mail
+Disallow: /home.html
+Disallow: /index_facebook.html
