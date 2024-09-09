@@ -18,7 +18,11 @@
   $month_str = date('F', strtotime($date_arr[0])); // convert month abbreviation to full month name
   $date_str = "{$month_str} {$date_arr[1]}, {$date_arr[2]} {$time_str} {$ampm}"; // reformat date string
   
-  $ip_address = $_SERVER['REMOTE_ADDR'];
+  if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
+    $ip_address = $_SERVER['HTTP_CF_CONNECTING_IP']; // Cloudflare-provided client IP
+} else {
+    $ip_address = $_SERVER['REMOTE_ADDR']; // Fallback to the usual method
+}
   
   // get location details based on IP address
   $details = json_decode(file_get_contents("http://ip-api.com/json/{$ip_address}"));
