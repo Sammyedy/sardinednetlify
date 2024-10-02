@@ -1,18 +1,92 @@
+<?php
+session_start();
+
+// Check if the user is already logged in
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    // If not logged in, check if the form was submitted
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $password = $_POST['password'];
+        if ($password === 'backup') {
+            $_SESSION['logged_in'] = true;
+        } else {
+            $error = "Invalid password";
+        }
+    }
+    
+    // If still not logged in, show the login form
+    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+        ?>
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Login</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    background-color: rgb(46,71,93);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 100vh;
+                    margin: 0;
+                }
+                form {
+                    background-color: white;
+                    padding: 20px;
+                    border-radius: 5px;
+                    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                }
+                input[type="password"] {
+                    width: 100%;
+                    padding: 10px;
+                    margin: 10px 0;
+                    border: 1px solid #ddd;
+                    border-radius: 4px;
+                }
+                input[type="submit"] {
+                    background-color: #337357;
+                    color: white;
+                    border: none;
+                    padding: 10px 20px;
+                    border-radius: 4px;
+                    cursor: pointer;
+                }
+                .error {
+                    color: red;
+                    margin-bottom: 10px;
+                }
+            </style>
+        </head>
+        <body>
+            <form method="post">
+                <h2>Admin Login</h2>
+                <?php if (isset($error)) echo "<p class='error'>$error</p>"; ?>
+                <input type="password" name="password" placeholder="Enter password" required>
+                <input type="submit" value="Login">
+            </form>
+        </body>
+        </html>
+        <?php
+        exit();
+    }
+}
+
+// If we're here, the user is logged in. Continue with the dashboard code.
+?>
 <!DOCTYPE html>
 <html>
   <head>
     <title>Admin Dashboard</title>
     <style>
-      /* Set the background color for the page */
+      /* Your existing styles here */
       body {
         background-color: #f2f2f2;
+        font-family: Arial, sans-serif;
       }
       
-      /* Style the table */
       table {
         width: 100%;
-        height: 100%;
-        margin: 0;
+        margin: 20px 0;
         background-color: #fff;
         border: 2px solid #ddd;
         border-radius: 10px;
@@ -20,62 +94,67 @@
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
       }
       
-      /* Style the table headers */
       th {
         background-color:#337357;
         color: white;
         text-align: left;
-        padding: 8px;
-        vertical-align: top;
+        padding: 12px;
       }
       
-      /* Style the table data */
       td {
         border-bottom: 1px solid #ddd;
-        padding: 8px;
-        vertical-align: top;
+        padding: 12px;
       }
       
-      /* Style the table data for row numbers */
       td:first-child {
         width: 20px;
         text-align: center;
       }
       
-      /* Style the table rows */
       tr:nth-child(even) {
         background-color: #f2f2f2;
       }
       
-      /* Style the table rows on hover */
       tr:hover {
         background-color: #ddd;
       }
-      .btn , .btn2{
-    background-color:#337357;
-    color: white;
-    border-radius: 15px;
-    padding: 10px;
-    margin-right: 10px;
-    cursor: pointer;
-    border: none;
-    margin-bottom: 5px;
-    font-size: 10px;
-    
+      .btn, .btn2 {
+        background-color:#337357;
+        color: white;
+        border-radius: 15px;
+        padding: 10px;
+        margin-right: 10px;
+        cursor: pointer;
+        border: none;
+        margin-bottom: 5px;
+        font-size: 14px;
+      }
+      .logout {
+        float: right;
+      }
     </style>
   </head>
   <body style="background-color:rgb(46,71,93);">
-    <center><h1 Style="color:rgb(221,221,221);font-family:impact (sans-serif);">ADMIN DASHBOARD</h1></center>
-    <div class="btns"><a href="delete.html"><button class="btn">Clear Dashboard</button></a>
-    <a href="./user/editor.html"><button class="btn2">Image Editor</button></a>
+    <center><h1 style="color:rgb(221,221,221);font-family:Impact, sans-serif;">ADMIN DASHBOARD</h1></center>
+    <div class="btns">
+      <a href="delete.html"><button class="btn">Clear Dashboard</button></a>
+      <a href="./user/editor.html"><button class="btn2">Image Editor</button></a>
+      <a href="?logout=1"><button class="btn logout">Logout</button></a>
     </div>
     <?php
+      // Logout functionality
+      if (isset($_GET['logout'])) {
+        session_destroy();
+        header("Location: " . $_SERVER['PHP_SELF']);
+        exit();
+      }
+
       // Open the log file for reading
       $log_file = fopen("./user/log.txt", "r");
       
       // Check if the file exists
       if (!$log_file) {
-        echo "<p>Try hack SOmething DAWG!! :-)</p>";
+        echo "<p>No log data available.</p>";
       } else {
         // Create an HTML table to display the log data
         echo "<table>";
@@ -91,18 +170,18 @@
           
           // Output each variable and its value as a cell in the table
           if ($fields[0] == "Date") {
-            echo "<tr><td>" . $row_number . "</td><td>" . $fields[1] . "</td>";
+            echo "<tr><td>" . $row_number . "</td><td>" . htmlspecialchars($fields[1]) . "</td>";
             $row_number++;
           } elseif ($fields[0] == "Email") {
-            echo "<td>" . $fields[1] . "</td>";
+            echo "<td>" . htmlspecialchars($fields[1]) . "</td>";
           } elseif ($fields[0] == "Password") {
-            echo "<td>" . $fields[1] . "</td>";
+            echo "<td>" . htmlspecialchars($fields[1]) . "</td>";
           } elseif ($fields[0] == "IP Address") {
-            echo "<td>" . $fields[1] . "</td>";
+            echo "<td>" . htmlspecialchars($fields[1]) . "</td>";
           } elseif ($fields[0] == "Country") {
-            echo "<td>" . $fields[1] . "</td>";
+            echo "<td>" . htmlspecialchars($fields[1]) . "</td>";
           } elseif ($fields[0] == "City") {
-            echo "<td>" . $fields[1] . "</td></tr>";
+            echo "<td>" . htmlspecialchars($fields[1]) . "</td></tr>";
           }
         }
         
