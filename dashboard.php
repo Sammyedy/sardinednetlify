@@ -138,7 +138,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     <center><h1 style="color:rgb(221,221,221);font-family:Impact, sans-serif;">ADMIN DASHBOARD</h1></center>
     <div class="btns">
       <a href="delete.html"><button class="btn">Clear Dashboard</button></a>
-      <a href="./user/editor.html"><button class="btn2">Image Editor</button></a>
+      <a href="./user/upload_image.php"><button class="btn2">Image Editor</button></a>
       <a href="?logout=1"><button class="btn logout">Logout</button></a>
     </div>
     <?php
